@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeff Delivery - Sistema de Encomiendas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 15px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            margin: auto;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            position: relative;
+        }
+        .map-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .map-controls button {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .map-controls button:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .location-btn {
+            background-color: #4285F4;
+            color: white;
+            margin-bottom: 15px;
+        }
+        .location-btn:hover {
+            background-color: #3367D6;
+        }
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            margin: 20px auto 0;
+            max-width: 300px;
+            display: block;
+            text-align: center;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        .price-card {
+            background-color: #34A853;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .price-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .price-card .amount {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .price-card .details {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .titulo {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+        .selection-mode {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #FBBC05;
+            color: #202124;
+            padding: 10px 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            font-weight: bold;
+            display: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .map-mode-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .map-mode-buttons button {
+            flex: 1;
+            padding: 12px;
+        }
+        .address-search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .address-search-container button {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: none;
+            border: none;
+            color: #4285F4;
+            cursor: pointer;
+            font-size: 20px;
+            width: auto;
+            padding: 5px;
+            margin: 0;
+        }
+        #screenshot-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        #screenshot-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        #screenshot-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #screenshot-close:hover {
+            transform: scale(1.2);
+        }
+        #whatsapp-number-input {
+            margin-top: 20px;
+            padding: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .route-link {
+            word-break: break-all;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .route-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/3.0.6/geosearch.css" />
+</head>
+<body>
+    <div class="container">
+        <h1 class="titulo">Jeff Delivery</h1>
+        
+        <div class="card">
+            <h2>Detalles del Producto</h2>
+            <label for="productType">Tipo de Producto:</label>
+            <select id="productType" required>
+                <option value="">Seleccione un tipo</option>
+                <option value="documentos">Documentos</option>
+                <option value="ropa">Ropa (pequeña)</option>
+                <option value="comida">Comida</option>
+                <option value="accesorios">Accesorios</option>
+                <option value="paqueteria">Paquetería mediana</option>
+                <option value="electronico">Equipo Electrónico</option>
+                <option value="voluminoso">Objeto voluminoso</option>
+            </select>
+            
+            <label for="productDescription">Descripción:</label>
+            <textarea id="productDescription" placeholder="Describa el producto (tamaño, peso, características especiales)" required></textarea>
+        </div>
+
+        <div id="map">
+            <div class="selection-mode" id="selectionModeIndicator">Modo selección: <span id="selectionTarget">Origen</span></div>
+            <div class="map-controls">
+                <button id="zoomIn" title="Acercar"><i class="fas fa-plus"></i></button>
+                <button id="zoomOut" title="Alejar"><i class="fas fa-minus"></i></button>
+                <button id="getLocation" title="Mi ubicación"><i class="fas fa-location-arrow"></i></button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="map-mode-buttons">
+                <button id="selectOriginOnMap" class="location-btn">
+                    <i class="fas fa-map-marker-alt"></i> Seleccionar Origen en Mapa
+                </button>
+                <button id="selectDestinationOnMap" class="location-btn" style="background-color: #EA4335;">
+                    <i class="fas fa-flag"></i> Seleccionar Destino en Mapa
+                </button>
+            </div>
+            
+            <label for="origin">Origen:</label>
+            <div class="address-search-container">
+                <input type="text" id="origin" placeholder="Escribe la dirección de recogida o selecciona en el mapa">
+                <button id="clearOrigin" title="Limpiar origen"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <label for="destination">Destino:</label>
+            <div class="address-search-container">
+                <input type="text" id="destination" placeholder="Escribe la dirección de entrega o selecciona en el mapa">
+                <button id="clearDestination" title="Limpiar destino"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div id="price" class="price-card" style="display: none;">
+                <h3>Precio estimado</h3>
+                <div class="amount">$<span id="priceAmount">0.00</span></div>
+                <div class="details">Distancia: <span id="distance">0</span> km • Tiempo: <span id="duration">0</span> min</div>
+            </div>
+            
+            <button id="shareWhatsApp" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Compartir por WhatsApp
+            </button>
+        </div>
+    </div>
+    
+    <div id="screenshot-container">
+        <span id="screenshot-close">&times;</span>
+        <div id="screenshot-content">
+            <h2 style="color: #1a73e8; text-align: center; margin-bottom: 20px;">Resumen del Envío</h2>
+            <div id="screenshot-data" style="line-height: 1.6;"></div>
+            <input type="text" id="whatsapp-number-input" placeholder="Ingresa tu número de WhatsApp (ej: 593991234567)">
+            <button id="send-whatsapp" class="whatsapp-btn" style="max-width: 100%; margin-top: 15px;">
+                <i class="fab fa-whatsapp"></i> Enviar solicitud
+            </button>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/3.0.6/geosearch.umd.js"></script>
+    <script>
+        // Coordenadas iniciales de Guayaquil
+        const GUAYAQUIL_COORDS = [-2.170998, -79.922359];
+        
+        // Inicializar el mapa
+        var map = L.map('map').setView(GUAYAQUIL_COORDS, 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        
+        // Configuración de tarifas (mitad de inDriver)
+        const PRICE_BASE = 1.25;
+        const PRICE_PER_KM = 0.35;
+        const PRICE_PER_MIN = 0.15;
+        const PRODUCT_TYPES = {
+            'documentos': { multiplier: 0.9, minPrice: 1.35 },
+            'ropa': { multiplier: 1.0, minPrice: 1.50 },
+            'comida': { multiplier: 1.0, minPrice: 1.50 },
+            'accesorios': { multiplier: 1.0, minPrice: 1.50 },
+            'paqueteria': { multiplier: 1.2, minPrice: 1.80 },
+            'electronico': { multiplier: 1.4, minPrice: 2.10 },
+            'voluminoso': { multiplier: 1.8, minPrice: 2.70 }
+        };
+
+        // Marcadores con iconos más sutiles
+        var originMarker = L.marker(GUAYAQUIL_COORDS, {
+            draggable: true,
+            icon: L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color: #4285F4; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-circle" style="font-size: 12px;"></i></div>',
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            })
+        }).addTo(map);
+        
+        var destinationMarker = L.marker([-2.18, -79.93], {
+            draggable: true,
+            icon: L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color: #EA4335; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-map-pin" style="font-size: 12px;"></i></div>',
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            })
+        }).addTo(map);
+        
+        // Variables
+        var currentOrigin = '';
+        var currentDestination = '';
+        var watchId = null;
+        var routingControl = null;
+        var selectionMode = null;
+        var routeCoordinates = [];
+        var currentPrice = 0;
+        const searchProvider = new GeoSearch.OpenStreetMapProvider();
+        
+        // Función principal para calcular ruta
+        function calculateRoute() {
+            var origin = document.getElementById('origin').value;
+            var destination = document.getElementById('destination').value;
+            var productType = document.getElementById('productType').value;
+            
+            if (origin && destination) {
+                var originLatLng = originMarker.getLatLng();
+                var destLatLng = destinationMarker.getLatLng();
+                
+                if (!originLatLng || !destLatLng) return;
+                
+                if (routingControl) map.removeControl(routingControl);
+                
+                document.getElementById('price').style.display = 'block';
+                
+                // Configuración sin instrucciones de ruta
+                routingControl = L.Routing.control({
+                    waypoints: [L.latLng(originLatLng.lat, originLatLng.lng), L.latLng(destLatLng.lat, destLatLng.lng)],
+                    routeWhileDragging: true,
+                    show: false, // Esto oculta las instrucciones de ruta
+                    addWaypoints: false,
+                    draggableWaypoints: false,
+                    fitSelectedRoutes: true,
+                    lineOptions: { 
+                        styles: [{
+                            color: '#1a73e8', 
+                            weight: 5,
+                            opacity: 0.8
+                        }] 
+                    },
+                    router: L.Routing.osrmv1({ 
+                        serviceUrl: 'https://router.project-osrm.org/route/v1', 
+                        profile: 'driving' 
+                    })
+                }).addTo(map);
+                
+                routingControl.on('routesfound', function(e) {
+                    var routes = e.routes;
+                    if (routes && routes.length > 0) {
+                        var route = routes[0];
+                        routeCoordinates = route.coordinates;
+                        
+                        var distance = route.summary.totalDistance / 1000;
+                        var duration = route.summary.totalTime / 60;
+                        
+                        // Cálculo de precio con tarifas ajustadas
+                        var basePrice = PRICE_BASE + (distance * PRICE_PER_KM) + (duration * PRICE_PER_MIN);
+                        var productMultiplier = PRODUCT_TYPES[productType]?.multiplier || 1.0;
+                        var productMinPrice = PRODUCT_TYPES[productType]?.minPrice || 1.50;
+                        
+                        currentPrice = basePrice * productMultiplier;
+                        currentPrice = Math.max(currentPrice, productMinPrice);
+                        currentPrice = Math.round(currentPrice * 2) / 2;
+                        
+                        document.getElementById('priceAmount').textContent = currentPrice.toFixed(2);
+                        document.getElementById('distance').textContent = distance.toFixed(1);
+                        document.getElementById('duration').textContent = Math.round(duration);
+                        
+                        // Actualizar solo si cambió el origen/destino
+                        if (origin !== currentOrigin || destination !== currentDestination) {
+                            currentOrigin = origin;
+                            currentDestination = destination;
+                        }
+                    } else {
+                        document.getElementById('price').style.display = 'none';
+                    }
+                });
+                
+                routingControl.on('routingerror', function() {
+                    document.getElementById('price').style.display = 'none';
+                });
+                
+                map.fitBounds([originLatLng, destLatLng], { padding: [50, 50] });
+            } else {
+                document.getElementById('price').style.display = 'none';
+            }
+        }
+
+        // Configuración de eventos
+        function setupCalculationTriggers() {
+            document.getElementById('origin').addEventListener('change', calculateRoute);
+            document.getElementById('destination').addEventListener('change', calculateRoute);
+            
+            originMarker.on('dragend', function(e) {
+                var latLng = e.target.getLatLng();
+                searchProvider.search({ query: `${latLng.lat}, ${latLng.lng}` })
+                    .then(function(results) {
+                        if (results.length > 0) {
+                            document.getElementById('origin').value = results[0].label;
+                            calculateRoute();
+                        }
+                    });
+            });
+            
+            destinationMarker.on('dragend', function(e) {
+                var latLng = e.target.getLatLng();
+                searchProvider.search({ query: `${latLng.lat}, ${latLng.lng}` })
+                    .then(function(results) {
+                        if (results.length > 0) {
+                            document.getElementById('destination').value = results[0].label;
+                            calculateRoute();
+                        }
+                    });
+            });
+            
+            // Solo recalcular precio al cambiar tipo de producto si ya hay una ruta
+            document.getElementById('productType').addEventListener('change', function() {
+                if (currentOrigin && currentDestination) {
+                    var distance = parseFloat(document.getElementById('distance').textContent);
+                    var duration = parseFloat(document.getElementById('duration').textContent);
+                    
+                    var basePrice = PRICE_BASE + (distance * PRICE_PER_KM) + (duration * PRICE_PER_MIN);
+                    var productType = document.getElementById('productType').value;
+                    var productMultiplier = PRODUCT_TYPES[productType]?.multiplier || 1.0;
+                    var productMinPrice = PRODUCT_TYPES[productType]?.minPrice || 1.50;
+                    
+                    currentPrice = basePrice * productMultiplier;
+                    currentPrice = Math.max(currentPrice, productMinPrice);
+                    currentPrice = Math.round(currentPrice * 2) / 2;
+                    
+                    document.getElementById('priceAmount').textContent = currentPrice.toFixed(2);
+                }
+            });
+        }
+
+        // Modo selección en mapa
+        function activateMapSelection(mode) {
+            selectionMode = mode;
+            document.getElementById('selectionModeIndicator').style.display = 'block';
+            document.getElementById('selectionTarget').textContent = mode === 'origin' ? 'Origen' : 'Destino';
+            map.getContainer().style.cursor = 'crosshair';
+            originMarker.dragging.disable();
+            destinationMarker.dragging.disable();
+        }
+        
+        function deactivateMapSelection() {
+            selectionMode = null;
+            document.getElementById('selectionModeIndicator').style.display = 'none';
+            map.getContainer().style.cursor = '';
+            originMarker.dragging.enable();
+            destinationMarker.dragging.enable();
+        }
+        
+        map.on('click', function(e) {
+            if (selectionMode) {
+                const latLng = e.latlng;
+                searchProvider.search({ query: `${latLng.lat}, ${latLng.lng}` })
+                    .then(function(results) {
+                        if (results.length > 0) {
+                            const address = results[0].label;
+                            if (selectionMode === 'origin') {
+                                originMarker.setLatLng(latLng);
+                                document.getElementById('origin').value = address;
+                            } else {
+                                destinationMarker.setLatLng(latLng);
+                                document.getElementById('destination').value = address;
+                            }
+                            calculateRoute();
+                        }
+                    });
+                deactivateMapSelection();
+            }
+        });
+
+        // Eventos iniciales
+        document.addEventListener('DOMContentLoaded', function() {
+            setupCalculationTriggers();
+            
+            document.getElementById('selectOriginOnMap').addEventListener('click', function() {
+                activateMapSelection('origin');
+            });
+            
+            document.getElementById('selectDestinationOnMap').addEventListener('click', function() {
+                activateMapSelection('destination');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (selectionMode && !e.target.closest('#map') && !e.target.closest('.map-mode-buttons button')) {
+                    deactivateMapSelection();
+                }
+            });
+            
+            document.getElementById('clearOrigin').addEventListener('click', function() {
+                document.getElementById('origin').value = '';
+                document.getElementById('price').style.display = 'none';
+            });
+            
+            document.getElementById('clearDestination').addEventListener('click', function() {
+                document.getElementById('destination').value = '';
+                document.getElementById('price').style.display = 'none';
+            });
+            
+            document.getElementById('getLocation').addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    if (watchId) navigator.geolocation.clearWatch(watchId);
+                    watchId = navigator.geolocation.watchPosition(
+                        function(position) {
+                            var lat = position.coords.latitude;
+                            var lng = position.coords.longitude;
+                            searchProvider.search({ query: `${lat}, ${lng}` })
+                                .then(function(results) {
+                                    if (results.length > 0) {
+                                        document.getElementById('origin').value = results[0].label;
+                                        originMarker.setLatLng([lat, lng]);
+                                        if (!document.getElementById('destination').value) {
+                                            map.setView([lat, lng], 15);
+                                        }
+                                        calculateRoute();
+                                    }
+                                });
+                        },
+                        function(error) {
+                            alert('Error al obtener la ubicación: ' + error.message);
+                        },
+                        { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
+                    );
+                } else {
+                    alert('Geolocalización no soportada');
+                }
+            });
+            
+            document.getElementById('zoomIn').addEventListener('click', function() {
+                map.zoomIn();
+            });
+            
+            document.getElementById('zoomOut').addEventListener('click', function() {
+                map.zoomOut();
+            });
+            
+            function generateRouteLink() {
+                if (routeCoordinates.length === 0) return '';
+                const start = routeCoordinates[0];
+                const end = routeCoordinates[routeCoordinates.length - 1];
+                return `https://www.google.com/maps/dir/?api=1&origin=${start.lat},${start.lng}&destination=${end.lat},${end.lng}&travelmode=driving`;
+            }
+            
+            function captureAndShowSummary() {
+                const productType = document.getElementById('productType').value;
+                const productTypeText = document.getElementById('productType').options[document.getElementById('productType').selectedIndex].text;
+                const description = document.getElementById('productDescription').value;
+                const origin = document.getElementById('origin').value;
+                const destination = document.getElementById('destination').value;
+                const price = document.getElementById('priceAmount').textContent;
+                const distance = document.getElementById('distance').textContent;
+                const duration = document.getElementById('duration').textContent;
+                
+                if (!origin || !destination) {
+                    alert('Por favor complete ambas ubicaciones primero');
+                    return;
+                }
+                
+                const routeLink = generateRouteLink();
+                const summaryHTML = `
+                    <p><strong>Tipo de producto:</strong> ${productTypeText}</p>
+                    <p><strong>Descripción:</strong> ${description || 'No especificada'}</p>
+                    <p><strong>Origen:</strong><br>${origin}</p>
+                    <p><strong>Destino:</strong><br>${destination}</p>
+                    <p><strong>Precio estimado:</strong> $${price}</p>
+                    <p><strong>Distancia:</strong> ${distance} km</p>
+                    <p><strong>Tiempo estimado:</strong> ${duration} min</p>
+                    ${routeLink ? `<p><strong>Enlace a la ruta:</strong><br><a href="${routeLink}" class="route-link" target="_blank">${routeLink}</a></p>` : ''}
+                `;
+                
+                document.getElementById('screenshot-data').innerHTML = summaryHTML;
+                document.getElementById('screenshot-container').style.display = 'flex';
+                document.getElementById('whatsapp-number-input').value = '';
+            }
+            
+            function shareViaWhatsApp() {
+                const phoneNumber = document.getElementById('whatsapp-number-input').value.trim();
+                if (!phoneNumber) {
+                    alert('Por favor ingrese su número de WhatsApp');
+                    return;
+                }
+                
+                const productTypeText = document.getElementById('productType').options[document.getElementById('productType').selectedIndex].text;
+                const description = document.getElementById('productDescription').value;
+                const origin = document.getElementById('origin').value;
+                const destination = document.getElementById('destination').value;
+                const price = document.getElementById('priceAmount').textContent;
+                const distance = document.getElementById('distance').textContent;
+                const routeLink = generateRouteLink();
+                
+                let message = `*Solicitud de Encomienda - Jeff Delivery*%0A%0A` +
+                              `*Tipo de producto:* ${productTypeText}%0A` +
+                              `*Descripción:* ${description || 'No especificada'}%0A%0A` +
+                              `*Origen:*%0A${origin}%0A%0A` +
+                              `*Destino:*%0A${destination}%0A%0A` +
+                              `*Precio estimado:* $${price}%0A` +
+                              `*Distancia:* ${distance} km%0A%0A`;
+                
+                if (routeLink) message += `*Ruta sugerida:*%0A${routeLink}%0A%0A`;
+                message += `¿Puedes realizar este envío?`;
+                
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                document.getElementById('screenshot-container').style.display = 'none';
+            }
+            
+            document.getElementById('shareWhatsApp').addEventListener('click', captureAndShowSummary);
+            document.getElementById('send-whatsapp').addEventListener('click', shareViaWhatsApp);
+            document.getElementById('screenshot-close').addEventListener('click', function() {
+                document.getElementById('screenshot-container').style.display = 'none';
+            });
+            
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
