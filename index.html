@@ -8,99 +8,99 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 15px;
+            background-color: #e0f7fa;
             color: #333;
             display: flex;
             flex-direction: column;
-            align-items: center; 
+            align-items: center;
+            min-height: 100vh;
         }
         .card {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 80%;
-            max-width: 800px;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 550px;
             box-sizing: border-box;
-            margin: auto;
         }
         .container {
             width: 100%;
-            max-width: 800px;
-            padding: 15px;
+            max-width: 550px;
+            padding: 0;
         }
         input, textarea, select {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-bottom: 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 16px;
+            font-size: 14px;
         }
         #map {
-            height: 400px;
-            width: 80%;
-            margin: auto;
-            margin-bottom: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
+            height: 300px;
+            width: 100%;
+            margin: 0 auto 15px auto;
+            border: 1px solid #b2ebf2;
+            border-radius: 10px;
             position: relative;
         }
         .map-controls {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             z-index: 1001;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
         .map-controls button {
-            background-color: #333;
+            background-color: #00838f;
             color: white;
             border: none;
             border-radius: 6px;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            font-size: 14px;
         }
         .map-controls button:hover {
-            background-color: #555;
+            background-color: #006064;
             transform: scale(1.05);
         }
         button {
-            width: 50%;
-            padding: 14px;
-            margin-bottom: 15px;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
             border: none;
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
         .location-btn {
-            background-color: #4285F4;
+            background-color: #00acc1;
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .location-btn:hover {
-            background-color: #3367D6;
+            background-color: #00838f;
         }
         .whatsapp-btn {
             background-color: #25D366;
             color: white;
-            margin: 20px auto 0;
-            max-width: 300px;
+            margin: 15px auto 0;
+            max-width: 100%;
             display: block;
             text-align: center;
         }
@@ -108,130 +108,89 @@
             background-color: #128C7E;
         }
         .price-card {
-            background-color: #34A853;
+            background-color: #00bcd4;
             color: white;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 15px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         .price-card h3 {
             margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
         .price-card .amount {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .price-card .details {
-            font-size: 16px;
+            font-size: 14px;
             opacity: 0.9;
         }
         .titulo {
             text-align: center;
-            color: #1a73e8;
-            margin-bottom: 25px;
-            font-size: 28px;
+            color: #006064;
+            margin-bottom: 15px;
+            font-size: 24px;
         }
         .selection-mode {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: #FBBC05;
+            top: 10px;
+            left: 10px;
+            background-color: #ffc107;
             color: #202124;
-            padding: 10px 15px;
-            border-radius: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
             z-index: 1000;
             font-weight: bold;
             display: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 14px;
         }
         .map-mode-buttons {
             display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
         .map-mode-buttons button {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
+            font-size: 14px;
         }
         .address-search-container {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .address-search-container button {
             position: absolute;
-            right: 8px;
-            top: 8px;
+            right: 6px;
+            top: 6px;
             background: none;
             border: none;
-            color: #4285F4;
+            color: #00838f;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
             width: auto;
-            padding: 5px;
+            padding: 4px;
             margin: 0;
         }
-        #screenshot-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
+        label {
+            font-size: 14px;
+            color: #006064;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: block;
         }
-        #screenshot-content {
-            background-color: white;
-            padding: 25px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        #screenshot-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        #screenshot-close:hover {
-            transform: scale(1.2);
-        }
-        #whatsapp-number-input {
-            margin-top: 20px;
-            padding: 12px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .route-link {
-            word-break: break-all;
-            color: #1a73e8;
-            text-decoration: none;
-        }
-        .route-link:hover {
-            text-decoration: underline;
-        }
-
-        h2{
+        h2 {
             text-align: center;
+            font-size: 18px;
+            color: #00838f;
+            margin-top: 6px;
+            margin-bottom: 15px;
         }
-
-
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -256,11 +215,11 @@
             </select>
             
             <label for="productDescription">Descripción:</label>
-            <textarea id="productDescription" placeholder="Describa el producto (tamaño, peso, características especiales)" required ></textarea>
+            <textarea id="productDescription" placeholder="Describa el producto (tamaño, peso, características especiales)" rows="3"></textarea>
         </div>
 
         <div id="map">
-            <div class="selection-mode" id="selectionModeIndicator">Modo selección: <span id="selectionTarget">Origen</span></div>
+            <div class="selection-mode" id="selectionModeIndicator">Seleccionando: <span id="selectionTarget">Origen</span></div>
             <div class="map-controls">
                 <button id="zoomIn" title="Acercar"><i class="fas fa-plus"></i></button>
                 <button id="zoomOut" title="Alejar"><i class="fas fa-minus"></i></button>
@@ -271,22 +230,22 @@
         <div class="card">
             <div class="map-mode-buttons">
                 <button id="selectOriginOnMap" class="location-btn">
-                    <i class="fas fa-map-marker-alt"></i> Lugar de Recogida
+                    <i class="fas fa-map-marker-alt"></i> Recogida
                 </button>
-                <button id="selectDestinationOnMap" class="location-btn" style="background-color: #EA4335;">
-                    <i class="fas fa-flag"></i> Lugar de entrega
+                <button id="selectDestinationOnMap" class="location-btn">
+                    <i class="fas fa-flag"></i> Entrega
                 </button>
             </div>
             
             <label for="origin">Recogida:</label>
             <div class="address-search-container">
-                <input type="text" id="origin" placeholder="Escribe la dirección de recogida o selecciona en el mapa">
+                <input type="text" id="origin" placeholder="Dirección de recogida">
                 <button id="clearOrigin" title="Limpiar origen"><i class="fas fa-times"></i></button>
             </div>
             
             <label for="destination">Entrega:</label>
             <div class="address-search-container">
-                <input type="text" id="destination" placeholder="Escribe la dirección de entrega o selecciona en el mapa">
+                <input type="text" id="destination" placeholder="Dirección de entrega">
                 <button id="clearDestination" title="Limpiar destino"><i class="fas fa-times"></i></button>
             </div>
             
@@ -302,24 +261,13 @@
         </div>
     </div>
     
-    <div id="screenshot-container">
-        <span id="screenshot-close">&times;</span>
-        <div id="screenshot-content">
-            <h2 style="color: #1a73e8; text-align: center; margin-bottom: 20px;">Resumen del Envío</h2>
-            <div id="screenshot-data" style="line-height: 1.6;"></div>
-            <input type="text" id="whatsapp-number-input" placeholder="Ingresa tu número de WhatsApp (ej: 593991234567)">
-            <button id="send-whatsapp" class="whatsapp-btn" style="max-width: 100%; margin-top: 15px;">
-                <i class="fab fa-whatsapp"></i> Enviar solicitud
-            </button>
-        </div>
-    </div>
-    
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/3.0.6/geosearch.umd.js"></script>
     <script>
         // Coordenadas iniciales de Guayaquil
         const GUAYAQUIL_COORDS = [-2.170998, -79.922359];
+        const YOUR_WHATSAPP_NUMBER = "593994415377";
         
         // Inicializar el mapa
         var map = L.map('map').setView(GUAYAQUIL_COORDS, 13);
@@ -327,78 +275,128 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         
-        // Configuración de tarifas (mitad de inDriver)
-        const PRICE_BASE = 1.25;
-        const PRICE_PER_KM = 0.35;
-        const PRICE_PER_MIN = 0.15;
-        const PRODUCT_TYPES = {
-            'documentos': { multiplier: 0.9, minPrice: 1.35 },
-            'ropa': { multiplier: 1.0, minPrice: 1.50 },
-            'comida': { multiplier: 1.0, minPrice: 1.50 },
-            'accesorios': { multiplier: 1.0, minPrice: 1.50 },
-            'paqueteria': { multiplier: 1.2, minPrice: 1.80 },
-            'electronico': { multiplier: 1.4, minPrice: 2.10 },
-            'voluminoso': { multiplier: 1.8, minPrice: 2.70 }
-        };
+        // Nueva estructura de tarifas según tu solicitud
+        function calculatePrice(distanceKm) {
+            if (distanceKm <= 2) {
+                return 0.65;
+            } else if (distanceKm <= 3) {
+                return 0.65 + (distanceKm - 2) * 0.55;
+            } else {
+                return 0.65 + 0.55 + (distanceKm - 3) * 0.50;
+            }
+        }
 
-        // Marcadores con iconos más sutiles
+        // Crear los marcadores (pero no añadirlos al mapa todavía)
         var originMarker = L.marker(GUAYAQUIL_COORDS, {
             draggable: true,
             icon: L.divIcon({
                 className: 'custom-marker',
-                html: '<div style="background-color: #4285F4; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-circle" style="font-size: 12px;"></i></div>',
-                iconSize: [32, 32],
-                iconAnchor: [16, 16]
+                html: '<div style="background-color: #00acc1; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"><i class="fas fa-circle" style="font-size: 10px;"></i></div>',
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
             })
-        }).addTo(map);
-        
+        });
+
         var destinationMarker = L.marker([-2.18, -79.93], {
             draggable: true,
             icon: L.divIcon({
                 className: 'custom-marker',
-                html: '<div style="background-color: #EA4335; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-map-pin" style="font-size: 12px;"></i></div>',
-                iconSize: [32, 32],
-                iconAnchor: [16, 16]
+                html: '<div style="background-color: #e91e63; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"><i class="fas fa-map-pin" style="font-size: 10px;"></i></div>',
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
             })
-        }).addTo(map);
-        
+        });
+
         // Variables
         var currentOrigin = '';
         var currentDestination = '';
         var watchId = null;
         var routingControl = null;
-        var selectionMode = null;
+        var selectionMode = null; // 'origin' o 'destination'
         var routeCoordinates = [];
         var currentPrice = 0;
         const searchProvider = new GeoSearch.OpenStreetMapProvider();
         
-        // Función principal para calcular ruta
+        // Función para activar la selección en el mapa
+        function activateMapSelection(mode) {
+            selectionMode = mode;
+            document.getElementById('selectionModeIndicator').style.display = 'block';
+            document.getElementById('selectionTarget').textContent = mode === 'origin' ? 'Recogida' : 'Entrega';
+            map.getContainer().style.cursor = 'crosshair';
+            
+            // Añadir el marcador correspondiente si no está ya en el mapa
+            if (mode === 'origin' && !map.hasLayer(originMarker)) {
+                originMarker.addTo(map);
+            } else if (mode === 'destination' && !map.hasLayer(destinationMarker)) {
+                destinationMarker.addTo(map);
+            }
+            
+            // Deshabilitar el arrastre temporalmente durante la selección
+            originMarker.dragging.disable();
+            destinationMarker.dragging.disable();
+        }
+        
+        function deactivateMapSelection() {
+            selectionMode = null;
+            document.getElementById('selectionModeIndicator').style.display = 'none';
+            map.getContainer().style.cursor = '';
+            
+            // Volver a habilitar el arrastre
+            if (map.hasLayer(originMarker)) originMarker.dragging.enable();
+            if (map.hasLayer(destinationMarker)) destinationMarker.dragging.enable();
+        }
+        
+        // Evento de clic en el mapa
+        map.on('click', function(e) {
+            if (!selectionMode) return;
+            
+            const latLng = e.latlng;
+            searchProvider.search({ query: `${latLng.lat}, ${latLng.lng}` })
+                .then(function(results) {
+                    if (results.length > 0) {
+                        const address = results[0].label;
+                        
+                        if (selectionMode === 'origin') {
+                            originMarker.setLatLng(latLng);
+                            document.getElementById('origin').value = address;
+                        } else {
+                            destinationMarker.setLatLng(latLng);
+                            document.getElementById('destination').value = address;
+                        }
+                        
+                        // Calcular la ruta si ambos marcadores están colocados
+                        if (map.hasLayer(originMarker) && map.hasLayer(destinationMarker)) {
+                            calculateRoute();
+                        }
+                    }
+                });
+            
+            deactivateMapSelection();
+        });
+
+        // Función para calcular la ruta
         function calculateRoute() {
             var origin = document.getElementById('origin').value;
             var destination = document.getElementById('destination').value;
-            var productType = document.getElementById('productType').value;
             
-            if (origin && destination) {
+            if (origin && destination && map.hasLayer(originMarker) && map.hasLayer(destinationMarker)) {
                 var originLatLng = originMarker.getLatLng();
                 var destLatLng = destinationMarker.getLatLng();
-                
-                if (!originLatLng || !destLatLng) return;
                 
                 if (routingControl) map.removeControl(routingControl);
                 
                 document.getElementById('price').style.display = 'block';
                 
-                // Configuración sin instrucciones de ruta
                 routingControl = L.Routing.control({
                     waypoints: [L.latLng(originLatLng.lat, originLatLng.lng), L.latLng(destLatLng.lat, destLatLng.lng)],
                     routeWhileDragging: true,
-                    show: false, // Esto oculta las instrucciones de ruta
+                    show: false,
                     addWaypoints: false,
                     draggableWaypoints: false,
                     fitSelectedRoutes: true,
                     lineOptions: { 
                         styles: [{
-                            color: '#1a73e8', 
+                            color: '#00acc1', 
                             weight: 5,
                             opacity: 0.8
                         }] 
@@ -418,24 +416,15 @@
                         var distance = route.summary.totalDistance / 1000;
                         var duration = route.summary.totalTime / 60;
                         
-                        // Cálculo de precio con tarifas ajustadas
-                        var basePrice = PRICE_BASE + (distance * PRICE_PER_KM) + (duration * PRICE_PER_MIN);
-                        var productMultiplier = PRODUCT_TYPES[productType]?.multiplier || 1.0;
-                        var productMinPrice = PRODUCT_TYPES[productType]?.minPrice || 1.50;
-                        
-                        currentPrice = basePrice * productMultiplier;
-                        currentPrice = Math.max(currentPrice, productMinPrice);
-                        currentPrice = Math.round(currentPrice * 2) / 2;
+                        currentPrice = calculatePrice(distance);
+                        currentPrice = Math.round(currentPrice * 100) / 100;
                         
                         document.getElementById('priceAmount').textContent = currentPrice.toFixed(2);
                         document.getElementById('distance').textContent = distance.toFixed(1);
                         document.getElementById('duration').textContent = Math.round(duration);
                         
-                        // Actualizar solo si cambió el origen/destino
-                        if (origin !== currentOrigin || destination !== currentDestination) {
-                            currentOrigin = origin;
-                            currentDestination = destination;
-                        }
+                        currentOrigin = origin;
+                        currentDestination = destination;
                     } else {
                         document.getElementById('price').style.display = 'none';
                     }
@@ -445,7 +434,7 @@
                     document.getElementById('price').style.display = 'none';
                 });
                 
-                map.fitBounds([originLatLng, destLatLng], { padding: [50, 50] });
+                map.fitBounds([originLatLng, destLatLng], { padding: [30, 30] });
             } else {
                 document.getElementById('price').style.display = 'none';
             }
@@ -478,75 +467,32 @@
                     });
             });
             
-            // Solo recalcular precio al cambiar tipo de producto si ya hay una ruta
             document.getElementById('productType').addEventListener('change', function() {
                 if (currentOrigin && currentDestination) {
                     var distance = parseFloat(document.getElementById('distance').textContent);
                     var duration = parseFloat(document.getElementById('duration').textContent);
                     
-                    var basePrice = PRICE_BASE + (distance * PRICE_PER_KM) + (duration * PRICE_PER_MIN);
-                    var productType = document.getElementById('productType').value;
-                    var productMultiplier = PRODUCT_TYPES[productType]?.multiplier || 1.0;
-                    var productMinPrice = PRODUCT_TYPES[productType]?.minPrice || 1.50;
-                    
-                    currentPrice = basePrice * productMultiplier;
-                    currentPrice = Math.max(currentPrice, productMinPrice);
-                    currentPrice = Math.round(currentPrice * 2) / 2;
+                    currentPrice = calculatePrice(distance);
+                    currentPrice = Math.round(currentPrice * 100) / 100;
                     
                     document.getElementById('priceAmount').textContent = currentPrice.toFixed(2);
                 }
             });
         }
 
-        // Modo selección en mapa
-        function activateMapSelection(mode) {
-            selectionMode = mode;
-            document.getElementById('selectionModeIndicator').style.display = 'block';
-            document.getElementById('selectionTarget').textContent = mode === 'origin' ? 'Origen' : 'Destino';
-            map.getContainer().style.cursor = 'crosshair';
-            originMarker.dragging.disable();
-            destinationMarker.dragging.disable();
-        }
-        
-        function deactivateMapSelection() {
-            selectionMode = null;
-            document.getElementById('selectionModeIndicator').style.display = 'none';
-            map.getContainer().style.cursor = '';
-            originMarker.dragging.enable();
-            destinationMarker.dragging.enable();
-        }
-        
-        map.on('click', function(e) {
-            if (selectionMode) {
-                const latLng = e.latlng;
-                searchProvider.search({ query: `${latLng.lat}, ${latLng.lng}` })
-                    .then(function(results) {
-                        if (results.length > 0) {
-                            const address = results[0].label;
-                            if (selectionMode === 'origin') {
-                                originMarker.setLatLng(latLng);
-                                document.getElementById('origin').value = address;
-                            } else {
-                                destinationMarker.setLatLng(latLng);
-                                document.getElementById('destination').value = address;
-                            }
-                            calculateRoute();
-                        }
-                    });
-                deactivateMapSelection();
-            }
-        });
-
         // Eventos iniciales
         document.addEventListener('DOMContentLoaded', function() {
             setupCalculationTriggers();
             
+            // Configurar eventos de los botones de selección
             document.getElementById('selectOriginOnMap').addEventListener('click', function() {
                 activateMapSelection('origin');
+                document.getElementById('origin').focus();
             });
             
             document.getElementById('selectDestinationOnMap').addEventListener('click', function() {
                 activateMapSelection('destination');
+                document.getElementById('destination').focus();
             });
             
             document.addEventListener('click', function(e) {
@@ -558,11 +504,13 @@
             document.getElementById('clearOrigin').addEventListener('click', function() {
                 document.getElementById('origin').value = '';
                 document.getElementById('price').style.display = 'none';
+                if (map.hasLayer(originMarker)) map.removeLayer(originMarker);
             });
             
             document.getElementById('clearDestination').addEventListener('click', function() {
                 document.getElementById('destination').value = '';
                 document.getElementById('price').style.display = 'none';
+                if (map.hasLayer(destinationMarker)) map.removeLayer(destinationMarker);
             });
             
             document.getElementById('getLocation').addEventListener('click', function() {
@@ -577,6 +525,7 @@
                                     if (results.length > 0) {
                                         document.getElementById('origin').value = results[0].label;
                                         originMarker.setLatLng([lat, lng]);
+                                        if (!map.hasLayer(originMarker)) originMarker.addTo(map);
                                         if (!document.getElementById('destination').value) {
                                             map.setView([lat, lng], 15);
                                         }
@@ -609,45 +558,8 @@
                 return `https://www.google.com/maps/dir/?api=1&origin=${start.lat},${start.lng}&destination=${end.lat},${end.lng}&travelmode=driving`;
             }
             
-            function captureAndShowSummary() {
-                const productType = document.getElementById('productType').value;
-                const productTypeText = document.getElementById('productType').options[document.getElementById('productType').selectedIndex].text;
-                const description = document.getElementById('productDescription').value;
-                const origin = document.getElementById('origin').value;
-                const destination = document.getElementById('destination').value;
-                const price = document.getElementById('priceAmount').textContent;
-                const distance = document.getElementById('distance').textContent;
-                const duration = document.getElementById('duration').textContent;
-                
-                if (!origin || !destination) {
-                    alert('Por favor complete ambas ubicaciones primero');
-                    return;
-                }
-                
-                const routeLink = generateRouteLink();
-                const summaryHTML = `
-                    <p><strong>Tipo de producto:</strong> ${productTypeText}</p>
-                    <p><strong>Descripción:</strong> ${description || 'No especificada'}</p>
-                    <p><strong>Origen:</strong><br>${origin}</p>
-                    <p><strong>Destino:</strong><br>${destination}</p>
-                    <p><strong>Precio estimado:</strong> $${price}</p>
-                    <p><strong>Distancia:</strong> ${distance} km</p>
-                    <p><strong>Tiempo estimado:</strong> ${duration} min</p>
-                    ${routeLink ? `<p><strong>Enlace a la ruta:</strong><br><a href="${routeLink}" class="route-link" target="_blank">${routeLink}</a></p>` : ''}
-                `;
-                
-                document.getElementById('screenshot-data').innerHTML = summaryHTML;
-                document.getElementById('screenshot-container').style.display = 'flex';
-                document.getElementById('whatsapp-number-input').value = '';
-            }
-            
             function shareViaWhatsApp() {
-                const phoneNumber = document.getElementById('whatsapp-number-input').value.trim();
-                if (!phoneNumber) {
-                    alert('Por favor ingrese su número de WhatsApp');
-                    return;
-                }
-                
+                const productType = document.getElementById('productType').value;
                 const productTypeText = document.getElementById('productType').options[document.getElementById('productType').selectedIndex].text;
                 const description = document.getElementById('productDescription').value;
                 const origin = document.getElementById('origin').value;
@@ -667,14 +579,19 @@
                 if (routeLink) message += `*Ruta sugerida:*%0A${routeLink}%0A%0A`;
                 message += `¿Puedes realizar este envío?`;
                 
-                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                document.getElementById('screenshot-container').style.display = 'none';
+                window.open(`https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
             }
             
-            document.getElementById('shareWhatsApp').addEventListener('click', captureAndShowSummary);
-            document.getElementById('send-whatsapp').addEventListener('click', shareViaWhatsApp);
-            document.getElementById('screenshot-close').addEventListener('click', function() {
-                document.getElementById('screenshot-container').style.display = 'none';
+            document.getElementById('shareWhatsApp').addEventListener('click', function() {
+                const origin = document.getElementById('origin').value;
+                const destination = document.getElementById('destination').value;
+                
+                if (!origin || !destination) {
+                    alert('Por favor complete ambas ubicaciones primero');
+                    return;
+                }
+                
+                shareViaWhatsApp();
             });
             
             setTimeout(function() {
