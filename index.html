@@ -21,9 +21,10 @@
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 100%;
+            width: 80%;
             max-width: 800px;
             box-sizing: border-box;
+            margin: auto;
         }
         .container {
             width: 100%;
@@ -41,7 +42,7 @@
         }
         #map {
             height: 400px;
-            width: 100%;
+            width: 80%;
             margin: auto;
             margin-bottom: 20px;
             border: 1px solid #e0e0e0;
@@ -76,7 +77,7 @@
             transform: scale(1.05);
         }
         button {
-            width: 100%;
+            width: 50%;
             padding: 14px;
             margin-bottom: 15px;
             border: none;
@@ -225,6 +226,12 @@
         .route-link:hover {
             text-decoration: underline;
         }
+
+        h2{
+            text-align: center;
+        }
+
+
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -249,7 +256,7 @@
             </select>
             
             <label for="productDescription">Descripción:</label>
-            <textarea id="productDescription" placeholder="Describa el producto (tamaño, peso, características especiales)" required></textarea>
+            <textarea id="productDescription" placeholder="Describa el producto (tamaño, peso, características especiales)" required ></textarea>
         </div>
 
         <div id="map">
@@ -264,20 +271,20 @@
         <div class="card">
             <div class="map-mode-buttons">
                 <button id="selectOriginOnMap" class="location-btn">
-                    <i class="fas fa-map-marker-alt"></i> Seleccionar Origen en Mapa
+                    <i class="fas fa-map-marker-alt"></i> Lugar de Recogida
                 </button>
                 <button id="selectDestinationOnMap" class="location-btn" style="background-color: #EA4335;">
-                    <i class="fas fa-flag"></i> Seleccionar Destino en Mapa
+                    <i class="fas fa-flag"></i> Lugar de entrega
                 </button>
             </div>
             
-            <label for="origin">Origen:</label>
+            <label for="origin">Recogida:</label>
             <div class="address-search-container">
                 <input type="text" id="origin" placeholder="Escribe la dirección de recogida o selecciona en el mapa">
                 <button id="clearOrigin" title="Limpiar origen"><i class="fas fa-times"></i></button>
             </div>
             
-            <label for="destination">Destino:</label>
+            <label for="destination">Entrega:</label>
             <div class="address-search-container">
                 <input type="text" id="destination" placeholder="Escribe la dirección de entrega o selecciona en el mapa">
                 <button id="clearDestination" title="Limpiar destino"><i class="fas fa-times"></i></button>
